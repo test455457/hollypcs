@@ -1,11 +1,14 @@
+import { Database } from '../lib/database.types';
+
 // User-related types
 export interface User {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
+  role: 'user' | 'admin';
   address?: Address;
-  orders: Order[];
+  orders?: Order[];
 }
 
 export interface Address {
@@ -68,3 +71,19 @@ export interface Order {
   shippingAddress: Address;
   createdAt: string;
 }
+
+// Admin Dashboard types
+export interface DashboardStats {
+  totalRevenue: number;
+  totalCustomers: number;
+  totalOrders: number;
+  averageOrderValue: number;
+  recentOrders: Order[];
+  topProducts: {
+    product: Product;
+    sales: number;
+  }[];
+}
+
+export type Tables = Database['public']['Tables'];
+export type Enums = Database['public']['Enums'];
